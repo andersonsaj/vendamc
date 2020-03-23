@@ -20,6 +20,7 @@ public class CategoriaResource {
 		Categoria cat2 = new Categoria(1, "Escritório");
 		
 		List<Categoria> list = Arrays.asList(cat1,cat2);
+		
 		return list;
 	}
 }
