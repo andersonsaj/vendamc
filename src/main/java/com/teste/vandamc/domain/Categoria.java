@@ -1,8 +1,7 @@
 package com.teste.vandamc.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -26,7 +25,7 @@ public class Categoria implements Serializable{
 	
 	@JsonManagedReference
 	@ManyToMany(mappedBy="categorias")
-	private List<Produto> produtos = new ArrayList<>();
+	private Set<Produto> produtos = new HashSet<>();
 	
 	public Categoria() {
 	}
@@ -53,11 +52,11 @@ public class Categoria implements Serializable{
 		this.nome = nome;
 	}
 
-	public List<Produto> getProdutos() {
+	public Set<Produto> getProdutos() {
 		return produtos;
 	}
 
-	public void setProdutos(List<Produto> produtos) {
+	public void setProdutos(Set<Produto> produtos) {
 		this.produtos = produtos;
 	}
 
