@@ -9,12 +9,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.teste.vandamc.domain.Categoria;
 import com.teste.vandamc.domain.Cidade;
+import com.teste.vandamc.domain.Cliente;
+import com.teste.vandamc.domain.Endereco;
 import com.teste.vandamc.domain.Estado;
 import com.teste.vandamc.domain.Produto;
 import com.teste.vandamc.repositories.CategoriaRepository;
 import com.teste.vandamc.repositories.CidadeRepository;
+import com.teste.vandamc.repositories.ClienteRepository;
+import com.teste.vandamc.repositories.EnderecoRepository;
 import com.teste.vandamc.repositories.EstadoRepository;
 import com.teste.vandamc.repositories.ProdutoRepository;
+import com.teste.vandamc.repositories.enums.TipoCliente;
 
 @SpringBootApplication
 public class VendamcApplication implements CommandLineRunner{
@@ -28,6 +33,10 @@ public class VendamcApplication implements CommandLineRunner{
 	private CidadeRepository repoCidade;
 	@Autowired
 	private EstadoRepository repoEstado;
+	@Autowired
+	private ClienteRepository repoCliente;
+	@Autowired
+	private EnderecoRepository repoEndereco;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(VendamcApplication.class, args);
@@ -64,6 +73,18 @@ public class VendamcApplication implements CommandLineRunner{
 		
 		repoEstado.saveAll(Arrays.asList(est1, est2));
 		repoCidade.saveAll(Arrays.asList(c1, c2, c3));
+		
+		Cliente cli1 = new Cliente(null, "Maria Silva", "maria@gmail.com", "616748481", TipoCliente.PESSOAFISICA);
+		cli1.getTelefones().addAll(Arrays.asList("167999498", "94949494"));
+		
+		Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto 300", "Jardim", "26494949", cli1, c1);
+		Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "34894949", cli1, c2);
+		
+		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		
+		repoCliente.saveAll(Arrays.asList(cli1));
+		repoEndereco.saveAll(Arrays.asList(e1,e2));
+		
 		
 		
 	}
